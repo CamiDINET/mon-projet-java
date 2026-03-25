@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     tools {
         maven 'M3'
     }
@@ -17,10 +17,12 @@ pipeline {
             }
         }
     }
+
     post {
         success {
-            echo "ça a fonctionné"
-            archiveArtifacts artifacts: 'target/mon-projet-java-1.0-SNAPSHOT.jar' fingerprint: true
+            echo "Ca a fonctionné"
+            archiveArtifacts artifacts: 'target/mon-projet-java-1.0-SNAPSHOT.jar', fingerprint: true
         }
     }
 }
+ 
