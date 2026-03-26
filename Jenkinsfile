@@ -6,7 +6,7 @@ pipeline {
     environment {
         IMG="mon-projet-java-camille:${env.BUILD_NUMBER}"
         CT_NAME="mon-projet-java-camille-container"
-        URL_NOTIFICATIONS="https://ntfy.sh/1x6DHZYwBpRxKUJF"
+        URL_NOTIFICATIONS="https://ntfy.sh/TdXLVUtxlLsGgczk"
         SONAR_PRJ_KEY="projet-camille"
     }
     stages {
