@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'vm-a-tout-faire'}
 
     tools {
         maven 'M3'
