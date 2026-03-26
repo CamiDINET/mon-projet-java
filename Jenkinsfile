@@ -6,12 +6,24 @@ pipeline {
     environment {
         IMG="mon-projet-java-camille:${env.BUILD_NUMBER}"
         CT_NAME="mon-projet-java-camille-container"
-        URL_NOTIFICATIONS="https://ntfy.sh/TdXLVUtxlLsGgczk"
+        URL_NOTIFICATIONS="https://ntfy.sh/1x6DHZYwBpRxKUJF"
+        SONAR_PRJ_KEY="projet-camille"
     }
     stages {
-        stage('Compilation') {
+        stage('Compilation du projet') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean verify'
+            }
+        }
+        stage('Analyse sonar') {
+            steps {
+                withSonarQubeEnv('SonarqubeSNCF') {
+                    sh """
+                    mvn sonar:sonar \
+                    -Dsonar.projectKey=${SONAR_PRJ_KEY} \
+                    -Dsonar.projectName=${SONAR_PRJ_KEY}
+                    """
+                }
             }
         }
         stage('Build docker image') {
@@ -27,7 +39,6 @@ pipeline {
             }
         }
     }
-    
     post {
         success {
             script {
@@ -56,4 +67,3 @@ pipeline {
         }
     }
 }
- 
