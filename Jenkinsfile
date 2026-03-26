@@ -1,17 +1,14 @@
 pipeline {
-    agent { label 'vm-a-tout-faire'}
-
+    agent { label 'vm-a-tout-faire' }
     tools {
         maven 'M3'
     }
-
     environment {
-        IMG= "mon projet java camille:${env.BUILD_NUMBER}"
+        IMG="mon-projet-java-camille:${env.BUILD_NUMBER}"
         CT_NAME="mon-projet-java-camille-container"
     }
-
     stages {
-        stage('Compilation du projet') {
+        stage('Compilation') {
             steps {
                 sh 'mvn clean package'
             }
@@ -29,7 +26,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             echo "Ca a fonctionné"
